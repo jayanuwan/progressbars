@@ -1,17 +1,23 @@
-import { shallowMount, mount } from '@vue/test-utils'
-import ProgressBar from '@/components/ProgressBar.vue'
-import ProgressButton from '@/components/ProgressButton.vue'
-import ProgressContainer from '@/components/ProgressContainer.vue'
+import { shallowMount, mount } from '@vue/test-utils';
+import ProgressBar from '@/components/ProgressBar.vue';
+import ProgressButton from '@/components/ProgressButton.vue';
+import ProgressContainer from '@/components/ProgressContainer.vue';
+import progressbars from '@/api/progressbars.js'
 import App from '@/App.vue'
 
-// const ProgressBar_wrapper = mount(ProgressBar)
+import mockAxios from "axios";
 
 const ProgressContainer_wrapper = shallowMount(ProgressContainer)
 const App_wrapper = shallowMount(App)
 
-// console.log(ProgressBar_wrapper.html());
-// console.log(ProgressButton_wrapper.html())
-// console.log(App_wrapper.html())
+
+describe('API', () => {
+
+  it('Data check', () => {
+    const data = progressbars.getData( );
+    
+  })
+})
 
 describe('Props', () => {
 
@@ -38,6 +44,10 @@ describe('Props', () => {
   it("Progress Bar Percentage", () => {
     console.log(wrapper.html())
     expect(wrapper.find('.percentage').text()).toBe("20%")
+  })
+
+  it("Progress select", () => {
+    expect(wrapper.find('option').text()).toBe('#progress1');
   })
   
 })
