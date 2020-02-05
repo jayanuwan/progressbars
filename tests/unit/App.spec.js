@@ -1,23 +1,7 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import ProgressBar from '@/components/ProgressBar.vue';
-import ProgressButton from '@/components/ProgressButton.vue';
 import ProgressContainer from '@/components/ProgressContainer.vue';
-import progressbars from '@/api/progressbars.js'
 import App from '@/App.vue'
-
-import mockAxios from "axios";
-
-const ProgressContainer_wrapper = shallowMount(ProgressContainer)
-const App_wrapper = shallowMount(App)
-
-
-describe('API', () => {
-
-  it('Data check', () => {
-    const data = progressbars.getData( );
-    
-  })
-})
 
 describe('Props', () => {
 
@@ -42,14 +26,36 @@ describe('Props', () => {
   })
 
   it("Progress Bar Percentage", () => {
-    console.log(wrapper.html())
     expect(wrapper.find('.percentage').text()).toBe("20%")
   })
 
   it("Progress select", () => {
     expect(wrapper.find('option').text()).toBe('#progress1');
   })
+
+  it("Click Button and check percentage", () => {
+    const btn = wrapper.find('button');
+    btn.trigger('click')
+    expect(wrapper.find('.percentage').text()).toBe("65%")
+  })
+
+  const mwrapper = mount(App, {
+    data() {
+      return {
+        buttons: [ -20
+        ],
+        bars: [ 80
+        ],
+        limit: 100
+      }
+    }
+  })
   
+  it("Click Button and check percentage - ", () => {
+    const btn = mwrapper.find('button');
+    btn.trigger('click')
+    expect(mwrapper.find('.percentage').text()).toBe("60%")
+  })
 })
 
 describe('Progress HTML', () => {
@@ -62,8 +68,8 @@ describe('Progress HTML', () => {
   })
 })
 
-describe('Props ', () => {
-  it("displays props", () => {
+describe('Progress Props ', () => {
+  it("Check props", () => {
     const wrapper = mount(ProgressBar,{
       propsData: {
         adjestment: 1,
